@@ -15,9 +15,7 @@ class MovieRecommender:
     def find_movie_index(self, movie_title):
         movie_indices = self.movies.loc[self.movies['title'].str.lower(
         ) == movie_title.lower()].index
-        if len(movie_indices) > 0:
-            return movie_indices[0]
-        return -1
+        return movie_indices[0] if movie_indices else -1
 
     def find_similar_movies(self, query_movie, num_recommended_movies=5):
         query_index = self.find_movie_index(query_movie)
@@ -35,7 +33,6 @@ class MovieRecommender:
 
 if __name__ == "__main__":
     movie_data_file = "path_to_movie_data.csv"
-    # Replace with the actual path to the movie data CSV file
     query_movie = "Avatar"
     movie_recommender = MovieRecommender(movie_data_file)
     recommendations = movie_recommender.find_similar_movies(
